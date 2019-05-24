@@ -1,6 +1,7 @@
 package com.sq.tools.utils;
 
-import com.alibaba.fastjson.JSONObject;
+
+import org.json.JSONObject;
 
 public class ResponseModel {
 
@@ -26,7 +27,7 @@ public class ResponseModel {
 
     public ResponseModel(JSONObject jo){
         this.code = SUCCESS;
-        this.jsonData = jo.toJSONString();
+        this.jsonData = jo.toString();
     }
 
     public ResponseModel(String joStr){
