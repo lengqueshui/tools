@@ -2,7 +2,7 @@ package com.sq.tools.controller;
 
 import com.sq.tools.utils.AmountChangeUtil;
 import com.sq.tools.utils.ResponseModel;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("transition")
 public class TransitionController {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping("/amount")
     @ResponseBody
     public ResponseModel changeAmt(@RequestParam(required = false) String amount) {
+        logger.info("changeAmt amount = " + amount);
         if (StringUtils.isEmpty(amount)) {
             return new ResponseModel(ResponseModel.COMMON_PARAMS_INVALID);
         }
