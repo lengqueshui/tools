@@ -1,7 +1,7 @@
 # application.yaml
 # Server settings (ServerProperties)
 server:
-  port: 8080
+  port: 80
   sessionTimeout: 30
   contextPath: /tools
 
