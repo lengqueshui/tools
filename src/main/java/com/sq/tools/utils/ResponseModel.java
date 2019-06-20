@@ -35,11 +35,11 @@ public class ResponseModel {
         this.jsonData = joStr;
     }
 
-    private int code;
+    private int code = SUCCESS;
 
-    private String msg;
+    private String msg = "";
 
-    private String jsonData;
+    private String jsonData = "";
 
     public int getCode() {
         return code;

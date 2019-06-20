@@ -12,3 +12,12 @@ server:
     remoteIpHeader: x-forwarded-for
     basedir:
     backgroundProcessorDelay: 30 # secs
+
+wechat:
+  name: ym
+  appid: wx35c7d53588c75798
+  secret: 43a249927c2627551a8cddd72007710a
+  token: ymyeyCourse
+  aeskey: opw4ZXB2A7ODKjAUZyNyY2bXej1zmVEW84fHYoaIodz
+  defaultReply: Hi~ <br>欢迎来到伊鸣幼儿园
+  #配置文件换行符用<br>
