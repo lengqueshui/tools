@@ -78,6 +78,8 @@ public class WechatHandlerController {
 		String nonce = request.getParameter(WechatUtils.NONCE);
 		String timestamp = request.getParameter(WechatUtils.TIMESTAMP);
 		String remoteAddr = HttpUtil.getIpAddress(request);
+		logger.warn("推送方IP={}, nonce={}, timestamp={}, signature={}",
+				remoteAddr, nonce, timestamp, signature);
 		// 判断服务器地址有效性
 		if (!checkSignature(timestamp, nonce, signature)) {
 			// 消息签名不正确，说明不是公众平台发过来的消息
@@ -87,8 +89,7 @@ public class WechatHandlerController {
 			return;
 		}
 
-		logger.info("非法请求，推送方IP={}, nonce={}, timestamp={}, signature={}",
-				remoteAddr, nonce, timestamp, signature);
+
 		String echostr = request.getParameter(WechatUtils.ECHOSTR);
 		if (StringUtils.isNotBlank(echostr)) {
 			// 说明是一个仅仅用来验证的请求，回显echostr
@@ -99,6 +100,7 @@ public class WechatHandlerController {
 		WxMpXmlMessage inMessage;
 		String encryptType = StringUtils.isBlank(request.getParameter(WechatUtils.ENCRYPT_TYPE)) ? "raw"
 				: request.getParameter(WechatUtils.ENCRYPT_TYPE);
+		logger.warn("推送方encryptType={}", encryptType);
 		switch (encryptType) {
 		case "raw": // 明文
 			inMessage = WxMpXmlMessage.fromXml(request.getInputStream());
