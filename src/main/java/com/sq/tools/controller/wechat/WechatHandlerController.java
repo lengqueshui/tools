@@ -67,6 +67,7 @@ public class WechatHandlerController {
 		return "success";
 	}
 
+	//http://39.106.5.215:8080/tools/msg/entry
 	@RequestMapping("/entry")
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -86,6 +87,8 @@ public class WechatHandlerController {
 			return;
 		}
 
+		logger.info("非法请求，推送方IP={}, nonce={}, timestamp={}, signature={}",
+				remoteAddr, nonce, timestamp, signature);
 		String echostr = request.getParameter(WechatUtils.ECHOSTR);
 		if (StringUtils.isNotBlank(echostr)) {
 			// 说明是一个仅仅用来验证的请求，回显echostr
