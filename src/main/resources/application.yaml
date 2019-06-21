@@ -19,5 +19,5 @@ wechat:
   secret: 43a249927c2627551a8cddd72007710a
   token: ymyeyCourse
   aeskey: opw4ZXB2A7ODKjAUZyNyY2bXej1zmVEW84fHYoaIodz
-  defaultReply: Hi~ <br>欢迎来到伊鸣幼儿园
+  defaultReply: Hi~ <br>欢迎关注伊鸣幼儿园微信公众号！<br><br>  伊鸣幼儿园创办于2006年，现拥有3个校区，16个教学班。我们的教师团队目标明确、高度负责、勇于创新，孩子健康快乐的成长是对我们最大的收获。<br>  <br>  招生电话： 15538509306<br>  15837982257
   #配置文件换行符用<br>

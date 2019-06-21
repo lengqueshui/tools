@@ -70,6 +70,7 @@ public class WechatHandlerController {
 	//http://39.106.5.215:8080/tools/msg/entry
 	@RequestMapping("/entry")
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		logger.info("entry");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
@@ -131,9 +132,16 @@ public class WechatHandlerController {
 				//qrcodeService.updateUnSubscribe(openId);
 			}
 
+			if (WxConsts.EVT_SUBSCRIBE.equals(inMessage.getEvent()) || WxConsts.EVT_SCAN.equals(inMessage.getEvent())) {
+				String eventKey = inMessage.getEventKey();
+				if (StringUtils.isEmpty(eventKey)) {
+					response.getWriter().write(WechatUtils.getTextMsg(inMessage, defaultReply));
+					return;
+				}
+			}
+
 			break;
 		case WxConsts.XML_MSG_TEXT:// 文本
-
 		case WxConsts.XML_MSG_IMAGE:// 图片
 		case WxConsts.XML_MSG_VOICE:// 声音
 		case WxConsts.XML_MSG_VIDEO:// 视频
