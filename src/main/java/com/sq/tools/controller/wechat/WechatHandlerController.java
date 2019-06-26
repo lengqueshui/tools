@@ -149,7 +149,8 @@ public class WechatHandlerController {
 		case WxConsts.XML_MSG_TEXT:// 文本
 		case WxConsts.XML_MSG_IMAGE:// 图片
 			logService.saveUserMsg(inMessage.getFromUserName(), inMessage.getMsgType(),
-					String.valueOf(inMessage.getMsgId()), inMessage.getContent(), inMessage.getPicUrl());
+					String.valueOf(inMessage.getMsgId()), (inMessage.getContent() == null ? "" : inMessage.getContent()),
+					(inMessage.getPicUrl() == null ? "" : inMessage.getPicUrl()));
 		case WxConsts.XML_MSG_VOICE:// 声音
 		case WxConsts.XML_MSG_VIDEO:// 视频
 		case WxConsts.XML_MSG_NEWS:// 新闻
