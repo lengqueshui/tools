@@ -13,6 +13,13 @@ server:
     basedir:
     backgroundProcessorDelay: 30 # secs
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.106.5.215:3306/school
+    username: root
+    password: mah123456
+
 wechat:
   name: ym
   appid: wx35c7d53588c75798

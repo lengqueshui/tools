@@ -1,5 +1,6 @@
 package com.sq.tools.controller.wechat;
 
+import com.sq.tools.service.LogService;
 import com.sq.tools.utils.HttpUtil;
 import com.sq.tools.utils.WechatUtils;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -9,6 +10,7 @@ import me.chanjar.weixin.mp.bean.WxMpXmlMessage;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -48,6 +50,9 @@ public class WechatHandlerController {
 	private String defaultReply;
 
 	private WxMpInMemoryConfigStorage config;
+
+	@Autowired
+	private LogService logService;
 	
 	@PostConstruct
 	public void init(){
@@ -143,6 +148,8 @@ public class WechatHandlerController {
 			break;
 		case WxConsts.XML_MSG_TEXT:// 文本
 		case WxConsts.XML_MSG_IMAGE:// 图片
+			logService.saveUserMsg(inMessage.getFromUserName(), inMessage.getMsgType(),
+					String.valueOf(inMessage.getMsgId()), inMessage.getContent(), inMessage.getPicUrl());
 		case WxConsts.XML_MSG_VOICE:// 声音
 		case WxConsts.XML_MSG_VIDEO:// 视频
 		case WxConsts.XML_MSG_NEWS:// 新闻

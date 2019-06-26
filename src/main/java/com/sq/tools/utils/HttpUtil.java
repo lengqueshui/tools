@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -202,4 +203,53 @@ public class HttpUtil {
 		}
 		return ip;
 	}
+
+	private static final String ACCESS_TOKEN_URL = "https://open.ys7.com/api/lapp/token/get";
+
+	private static final String APP_KEY = "ff956e80a03a4535b38a3ec6aaadd397";
+
+	private static final String APP_SECRET = "f721f7e1f89ab1333f4ef4551cb2a7d4";
+
+	private static void getAccessToken() {
+		Map<String, String> params = new HashMap<>();
+		params.put("appKey", APP_KEY);
+		params.put("appSecret", APP_SECRET);
+		System.out.println(doPost(ACCESS_TOKEN_URL, params));
+		//{"data":{"accessToken":"at.730ydd2619xmyd176dx699wt4buaojnb-3d2nflg7ig-0catjow-1kskkrnks","expireTime":1562036144904},"code":"200","msg":"操作成功!"}
+	}
+
+	private static final String ACCESS_TOKEN = "ra.6rmx7nsj9v0kiyme37u9yp9x9er17a74-48z4v45m8a-0z67tpu-6cfjuvurz";//"at.730ydd2619xmyd176dx699wt4buaojnb-3d2nflg7ig-0catjow-1kskkrnks";
+
+
+	private static final String ALIVE_VIDEO_LIST_URL = "https://open.ys7.com/api/lapp/live/video/list";
+
+	private static void getAliveVideoList() {
+		Map<String, String> params = new HashMap<>();
+		params.put("accessToken", ACCESS_TOKEN);
+		params.put("pageStart", "0");
+		params.put("pageSize", "50");
+		System.out.println(doPost(ALIVE_VIDEO_LIST_URL, params));
+		//{"page":{"total":1,"page":0,"size":50},"data":[{"deviceSerial":"203751922","channelNo":1,"deviceName":"测试设备A","liveAddress":"http://hls01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.m3u8","hdAddress":"http://hls01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd.m3u8","rtmp":"rtmp://rtmp01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b","rtmpHd":"rtmp://rtmp01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd","flvAddress":"https://flvopen.ys7.com:9188/openlive/f01018a141094b7fa138b9d0b856507b.flv","hdFlvAddress":"https://flvopen.ys7.com:9188/openlive/f01018a141094b7fa138b9d0b856507b.hd.flv","status":1,"exception":0,"beginTime":1525501260000,"endTime":1561391688000}],"code":"200","msg":"操作成功!"}
+	}
+
+	private static final String ALIVE_ADDRESS_LIMITED_URL = "https://open.ys7.com/api/lapp/live/address/limited";
+
+	private static void getAliveVideoLimited() {
+		Map<String, String> params = new HashMap<>();
+		params.put("accessToken", ACCESS_TOKEN);
+		params.put("deviceSerial", "203751922");
+		params.put("channelNo", "1");
+		params.put("expireTime", "300");
+		System.out.println(doPost(ALIVE_ADDRESS_LIMITED_URL, params));
+		//{"page":{"total":1,"page":0,"size":50},"data":[{"deviceSerial":"203751922","channelNo":1,"deviceName":"测试设备A","liveAddress":"http://hls01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.m3u8","hdAddress":"http://hls01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd.m3u8","rtmp":"rtmp://rtmp01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b","rtmpHd":"rtmp://rtmp01open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd","flvAddress":"https://flvopen.ys7.com:9188/openlive/f01018a141094b7fa138b9d0b856507b.flv","hdFlvAddress":"https://flvopen.ys7.com:9188/openlive/f01018a141094b7fa138b9d0b856507b.hd.flv","status":1,"exception":0,"beginTime":1525501260000,"endTime":1561391688000}],"code":"200","msg":"操作成功!"}
+	}
+
+
+	public static void main (String[] args) {
+		System.out.println("-----------------");
+		getAliveVideoLimited();
+		System.out.println("-----------------");
+
+	}
+
 }
